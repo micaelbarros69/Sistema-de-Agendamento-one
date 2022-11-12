@@ -1,6 +1,13 @@
 import "react-native-reanimated";
 import React, { useState, useEffect } from "react";
-import { StatusBar, View, Button, Text, SafeAreaView } from "react-native";
+import {
+  StatusBar,
+  View,
+  Button,
+  Text,
+  SafeAreaView,
+  Alert,
+} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import Routes from "./src/routes/Routes";
 

@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   TextBold,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import * as Animatable from "react-native-animatable";
@@ -14,13 +15,39 @@ import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import validator from "validator";
 import { Keyframe } from "react-native-reanimated";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../services/firebaseConnection";
+import { signInWithEmailAndPassword } from "firebase/auth";
 export default function Login() {
   const navigation = useNavigation();
   const [hidePass, setHidePass] = useState(true);
-  const [emailField, setEmailFild] = useState("");
+  const [emailField, setEmailField] = useState("");
   const [passwordField, setPasswordField] = useState("");
-  const [nomeField, setNomeFild] = useState("");
+  const [nomeField, setNomeField] = useState("");
   const [number, onChangeNumber] = React.useState(null);
+  const auth = getAuth();
+  createUserWithEmailAndPassword(auth, emailField, passwordField)
+    .then((userCredential) => {
+      // Signed in
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+
+  function handlelogin2(e) {
+    e.preventDefault();
+
+    if (emailField === "" || passwordField === "" || nomeField === "") {
+      Alert.alert("Acorda ai Amigo", "Esqueceu de Preenche os Campos!");
+
+      return;
+    }
+    navigation.navigate("Home");
+  }
 
   return (
     <View style={styles.container}>
@@ -70,10 +97,7 @@ export default function Login() {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("Home2")}
-        >
+        <TouchableOpacity style={styles.button} onPress={handlelogin2}>
           <Text style={styles.buttonText}>Acessar</Text>
         </TouchableOpacity>
 

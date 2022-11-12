@@ -1,70 +1,115 @@
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Agendas from "../components/Header/Agendas/index";
 import Movimentos from "../components/Movimentos";
 import Actions from "../components/Actions";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationAction } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
+import Login from "./Casdastro";
+
 const list = [
   {
     id: 1,
-    label: "boleto conta luz",
-    value: "300,00",
-    data: "17/09/2022",
-    type: 0,
+    label: "IFCE Campus Canindé",
+    value: "Aberto",
+    type: "Aberto",
   },
   {
     id: 2,
-    label: "pix cliente x",
-    value: "2.500,00",
-    data: "20/09/2022",
+    label: "EEF Senador Carlos Jereissati",
+    value: "Fechado",
+
     type: 1,
   },
   {
     id: 3,
-    label: "salario",
-    value: "7.500,00",
-    data: "27/09/2022",
+    label: "Ginasio Paulo Sarasate",
+    value: "Fechado",
+
     type: 1,
+  },
+  {
+    id: 4,
+    label: "Space Inova",
+    value: "Aberto",
+
+    type: "Aberto",
+  },
+  {
+    id: 5,
+    label: "Frei Orlando",
+    value: "Fechado",
+
+    type: 1,
+  },
+  {
+    id: 6,
+    label: "Campo do SAAE",
+    value: "Aberto",
+
+    type: "Aberto",
+  },
+  {
+    id: 7,
+    label: "Campo do SAAE",
+    value: "Aberto",
+
+    type: "Aberto",
+  },
+  {
+    id: 8,
+    label: "Campo do SAAE",
+    value: "Aberto",
+
+    type: "Aberto",
   },
 ];
 
 export default function Home() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <Header nome="Micael Barros" />
-
-      <Agendas saldo="9.250,00" gastos="-527,00" />
+      <Header />
 
       <Actions />
 
-      <Text style={styles.title}> ultimas movimentações</Text>
+      <Text style={styles.title}>Lista de Espaços </Text>
 
       <FlatList
         style={styles.list}
         data={list}
         keyExtractor={(item) => String(item.id)}
-        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => <Movimentos data={item} />}
       />
-    </View> //barra de rolagem
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fafafa",
+    flex: 1,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginLeft: 14,
-    marginRight: 14,
-    marginTop: 14,
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: 20,
     marginBottom: 14,
   },
   list: {
     marginStart: 14,
     marginEnd: 14,
+    flex: 0,
   },
 });

@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   form,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import * as Animatable from "react-native-animatable";
@@ -12,6 +13,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationAction } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { auth } from "../services/firebaseConnection";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -20,13 +23,30 @@ export default function Login() {
 
   const [passwordField, setPasswordField] = useState("");
 
-  const handlelogin = () => {
-    if (emailField != "" && passwordField != "") {
-      alert({ emailField });
-    } else {
-      alert("Preencha os campos");
+  // const handlelogin = () => {
+  //   if (emailField != "" && passwordField != "") {
+  //   } else {
+  //     alert("Preencha os campos");
+  //   }
+  // };
+
+  function handlelogin(e) {
+    e.preventDefault();
+
+    if (emailField === "" || passwordField === "") {
+      Alert.alert("Acorda ai Amigo", "Esqueceu de Preenche os Campos!");
+
+      return;
     }
-  };
+
+    signInWithEmailAndPassword(auth, emailField, passwordField)
+      .then(() => {
+        navigation.navigate("Home");
+      })
+      .catch(() => {
+        Alert.alert("Acorda ai Amigo", "Email ou Senha Errado");
+      });
+  }
 
   return (
     <View style={styles.container}>
