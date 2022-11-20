@@ -56,12 +56,11 @@ export default function Actions() {
 
 const styles = StyleSheet.create({
   container: {
-    maxHeight: 84,
     marginBottom: 14,
-    marginTop: 30,
     paddingEnd: 14,
     paddingEnd: 14,
     paddingStart: 14,
+    backgroundColor: "#38A69D",
   },
   actionButton: {
     alignItems: "center",
@@ -76,8 +75,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   labelButton: {
-    marginTop: 4,
+    marginTop: 90,
     textAlign: "center",
     fontWeight: "bold",
+    color: "#fff",
   },
 });

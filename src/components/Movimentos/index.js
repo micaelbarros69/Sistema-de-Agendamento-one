@@ -6,20 +6,28 @@ import { NavigationAction } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Movimentos({ data }) {
+  const navigation = useNavigation();
   const [showValue, setShowValue] = useState(false);
   return (
     <TouchableOpacity
-      style={styles.conteiner}
-      onPress={() => setShowValue(!showValue)}
+      style={styles.container}
+      onPress={() => navigation.navigate("Quadras")}
     >
       <Text style={styles.data}>{data.data}</Text>
 
       <View style={styles.content}>
         <Text style={styles.label}>{data.label}</Text>
-
-        <Text style={data.type === "Aberto" ? styles.value : styles.expenses}>
+        {/* 
+        <Text
+          style={data.type === "Aberto" ? styles.value : styles.expenses}
+          onPress={() => navigation.navigate("Quadras")}
+        >
           {data.type === "Aberto" ? ` ${data.value}` : ` ${data.value}`}{" "}
-        </Text>
+        </Text> */}
+
+        {/* <TouchableOpacity onPress={() => navigation.navigate("Quadras")}>
+          <Text>Veja mais informações</Text>
+        </TouchableOpacity> */}
       </View>
     </TouchableOpacity>
   );
@@ -27,9 +35,8 @@ export default function Movimentos({ data }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 0,
-    marginBottom: 24,
-    borderBottomWidth: 0.5,
+    marginBottom: 15,
+    borderBottomWidth: 1,
     borderBottomColor: "#dadada",
   },
   content: {
@@ -45,6 +52,8 @@ const styles = StyleSheet.create({
   label: {
     fontWeight: "bold",
     fontSize: 16,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   value: {
     fontSize: 16,

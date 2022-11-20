@@ -5,6 +5,7 @@ import Login from "../pags/Login";
 import Home from "../pags/Home";
 import Calendario from "../pags/Calendario";
 import Cadastro from "../pags/Casdastro";
+import Quadras from "../Quadras";
 const Stack = createNativeStackNavigator();
 export default function Routes() {
   return (
@@ -39,6 +40,11 @@ export default function Routes() {
       <Stack.Screen
         name="Cadastro"
         component={Cadastro}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Quadras"
+        component={Quadras}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

@@ -7,18 +7,19 @@ import {
   TextBold,
   Alert,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import * as Animatable from "react-native-animatable";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationAction } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import validator from "validator";
+import { AuthContext } from "../contexts/auth";
 import { Keyframe } from "react-native-reanimated";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebaseConnection";
 import { signInWithEmailAndPassword } from "firebase/auth";
-export default function Login() {
+export default function Login({}) {
   const navigation = useNavigation();
   const [hidePass, setHidePass] = useState(true);
   const [emailField, setEmailField] = useState("");
@@ -26,6 +27,7 @@ export default function Login() {
   const [nomeField, setNomeField] = useState("");
   const [number, onChangeNumber] = React.useState(null);
   const auth = getAuth();
+
   createUserWithEmailAndPassword(auth, emailField, passwordField)
     .then((userCredential) => {
       // Signed in

@@ -6,7 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Header from "../components/Header";
 import Agendas from "../components/Header/Agendas/index";
 import Movimentos from "../components/Movimentos";
@@ -15,6 +15,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationAction } from "@react-navigation/native";
 import { useNavigation } from "@react-navigation/native";
 import Login from "./Casdastro";
+import { AuthContext } from "../contexts/auth";
 
 const list = [
   {
@@ -75,14 +76,22 @@ const list = [
 ];
 
 export default function Home() {
+  const { nome } = useContext(AuthContext);
+  const [nomeField, setNomeField] = useState(nomeField);
   const navigation = useNavigation();
+  function handlelogin(e) {
+    e.preventDefault();
+    navigation.navigate("Cadastro");
+
+    return;
+  }
+
   return (
     <View style={styles.container}>
-      <Header />
+      <Header nome={nomeField} />
 
       <Actions />
-
-      <Text style={styles.title}>Lista de Espaços </Text>
+      <Text style={styles.title}>Lista de Locais Disponiveis</Text>
 
       <FlatList
         style={styles.list}
@@ -96,20 +105,23 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fafafa",
     flex: 1,
+    backgroundColor: "#fafafa",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    marginLeft: "auto",
-    marginRight: "auto",
     marginTop: 20,
     marginBottom: 14,
+    marginLeft: 10,
+    marginLeft: "auto",
+    marginRight: "auto",
+    color: "#38A69D",
   },
   list: {
     marginStart: 14,
     marginEnd: 14,
+
     flex: 0,
   },
 });

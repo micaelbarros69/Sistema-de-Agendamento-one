@@ -21,7 +21,7 @@ export default function Header({ nome }) {
       <View style={styles.content}>
         <Text style={styles.username}>{nome}</Text>
         <TouchableOpacity style={styles.buttonuser}>
-          <Feather name="user" size={27} color="#fff" />
+          <Feather name="user" size={50} color="#fff" />
         </TouchableOpacity>
       </View>
     </View>
@@ -52,6 +52,8 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255, 255, 255, 0.5)",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 44 / 2,
+    borderRadius: 40 / 2,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
 });
